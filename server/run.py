@@ -16,6 +16,9 @@ import termios
 import tty
 import pigpio
 import time
+import threading
+import queue
+import traceback
 from random import randint
 from thread import start_new_thread
 
@@ -28,11 +31,11 @@ class CLIIO:
 	@classmethod
 	def run(cls):
 
-	cls.print_to_shell(BLINK.commands('help'[0])()[0])
+		cls.print_to_shell(BLINK.commands('help'[0])()[0])
 
 		for cmd in cls.get_ch('>> '):
-	cmd = cmd.split(' ', 1)
-	cls.print_to_shell(BLINK.commands(cmd[0][0])(*cmd)[0])
+			cmd = cmd.split(' ', 1)
+			cls.print_to_shell(BLINK.commands(cmd[0][0])(*cmd)[0])
 
 	@staticmethod
 	def get_ch(placeholder):
@@ -244,7 +247,7 @@ try:
 		os.sys.exit(CLIIO.run())
 
 except Exception as e:
-	CLIIO.print_to_shell(f'Oh no! Something has gone wrong. {e}\n{traceback.format_exc()}')
+	CLIIO.print_to_shell('Oh no! Something has gone wrong. {e}\n{traceback.format_exc()}')
 
 finally:
 	CLIIO.print_to_shell('Aborting...')
