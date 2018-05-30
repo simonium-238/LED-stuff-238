@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RGBLED-Control</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/script%20-%20Kopie.js"></script>
+    </head>
+    <body>
+        <header id = "header" class="unselectable">
+            RGBLED-Control
+        </header>
+        <div id="rgbCursor" hidden></div>
+        <img id="imgWheel"src="img/rgbringsmall.png">
+        <canvas id="canvas" height="500" width="500">
+        </canvas>
+        <form>
+            <div id="saturationDiv">
+                <input type="range" min="-100" max="0"  id="saturation" oninput="func1()">
+            </div>
+            <div id="rgbholder">
+                <div id="debuggingSectionLeft" class="unselectable" onmouseover="hover()" onmouseout="out()">
+                    <p>Red: <strong id="red">255</strong></p>
+                    <p>Green: <strong id="green">255</strong></p>
+                    <p>Blue: <strong id="blue">255</strong></p>
+                    <span id="colorSpan" onclick="funcEditRGB()">Click to type</span>
+                </div>
+                <div id="editColor">
+                    <table>
+                        <tr>
+                            <td>
+                                <table id="colorTable">
+                            <tr>
+                                <td>Red:</td>
+                                <td><input type="number" name="redInput" id="redInput" min="0" max="255" value="255" class="colorInputs" oninput="funcEditChange()"></td>
+                            </tr>
+                            <tr>
+                                <td>Green:</td>
+                                <td><input type="number" name="greenInput" id="greenInput" min="0" max="255" value="255" class="colorInputs" oninput="funcEditChange()"></td>
+                            </tr>
+                            <tr>
+                                <td>Blue:</td>
+                                <td><input type="number" name="blueInput" id="blueInput" min="0" max="255" value="255" class="colorInputs" oninput="funcEditChange()"></td>
+                            </tr>
+                        </table>
+                            </td>
+                            <td>
+                                <div id="colorPreview"></div>
+                            </td>
+                            <td>
+                                <div id="Controlstuff">
+                        <div class="controlls" onclick="closeColorType()">&#10004;</div>
+                    </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        <div id="debuggingSectionRight" class="unselectable" hidden="hidden">
+            <p>PageX: <strong id="pageX"></strong></p>
+            <p>OffsetX: <strong id="offX"></strong></p>
+            <p>PageY: <strong id="pageY"></strong></p> 
+            <p>OffsetY: <strong id="offY"></strong></p>
+        </div>
+        <div id="toFunctionBar" class="unselectable">Choose Effect</div>
+        <div id="functionBody">
+            <div class="function unselectable">
+                <div class="functionHead">No Effect</div>
+                <div class="functionText">The Stripe will constantly shine only in the color you have selected.</div>
+                <div class="imageDif">
+                    <div class="lamp"><div id="oneColorLight" class="light"></div></div>
+                </div>
+            </div>
+            <div class="function unselectable">
+                <div class="functionHead">Single Color Blink</div>
+                <div class="functionText">The Stripe will constantly blink in the one color you have selected.</div>
+                <div class="imageDif">
+                    <div class="lamp"><div id="singleColorBlinkLight" class="light blink"></div></div>
+                </div>
+                <div>
+                    <input type="number" step="0.1" hidden>
+                </div>
+            </div>
+            
+        </div>
+<style type="text/css">
+<!--
+/* @group Blink */
+.blink {
+	-webkit-animation: blink .75s linear infinite;
+	-moz-animation: blink .75s linear infinite;
+	-ms-animation: blink .75s linear infinite;
+	-o-animation: blink .75s linear infinite;
+	 animation: blink .75s linear infinite;
+}
+@-webkit-keyframes blink {
+	0% { opacity: 1; }
+	50% { opacity: 1; }
+	50.01% { opacity: 0; }
+	100% { opacity: 0; }
+}
+@-moz-keyframes blink {
+	0% { opacity: 1; }
+	50% { opacity: 1; }
+	50.01% { opacity: 0; }
+	100% { opacity: 0; }
+}
+@-ms-keyframes blink {
+	0% { opacity: 1; }
+	50% { opacity: 1; }
+	50.01% { opacity: 0; }
+	100% { opacity: 0; }
+}
+@-o-keyframes blink {
+	0% { opacity: 1; }
+	50% { opacity: 1; }
+	50.01% { opacity: 0; }
+	100% { opacity: 0; }
+}
+@keyframes blink {
+	0% { opacity: 1; }
+	50% { opacity: 1; }
+	50.01% { opacity: 0; }
+	100% { opacity: 0; }
+}
+/* @end */
+-->
+</style>
+        </form>
+    </body>
+</html>
