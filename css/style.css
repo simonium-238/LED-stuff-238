@@ -299,3 +299,35 @@ span{
     margin: 10px;
     margin-bottom: 0;
 }
+.FunctionInput{
+    height: 23px;
+    width: 65px;
+    border: none;
+    background-color: #2a2a2a;
+    color: #868686;
+    font-family: monospace;
+    font-weight: 800;
+    font-size: 20px;
+    outline: none;
+    float: right;
+    margin-right: 45px;
+}
+.inputDescription{
+    float: left;
+    height: 23px;
+    color: #868686;
+    background-color: #2a2a2a;
+    font-family: monospace;
+    font-weight: 800;
+    font-size: 20px;
+    margin-left: 45px;
+    width: 75px;
+    text-align: left
+}
+.blink {
+	-webkit-animation: blink .75s linear infinite;
+	-moz-animation: blink .75s linear infinite;
+	-ms-animation: blink .75s linear infinite;
+	-o-animation: blink .75s linear infinite;
+	 animation: blink .75s linear infinite;
+}

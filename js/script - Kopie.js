@@ -342,3 +342,14 @@ function dragElement(elmnt) {
         //$("#pageY").text(e.pageY);
     //});
 };
+
+function singleColorBlinkChange()
+{
+    var speed = document.getElementById("singleColorBlinkInput").value;
+    var speed = speed.replace(",", ".");
+
+    document.styleSheets[0].addRule(".blink", "-webkit-animation: blink " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".blink", "-moz-animation: blink " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".blink", "-ms-animation: blink " + speed + " linear infinite");
+    document.styleSheets[0].addRule(".blink", "animation: blink " + speed + "s linear infinite");
+}
