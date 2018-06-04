@@ -14,15 +14,14 @@ import os
 import sys
 import termios
 import tty
-import pigpio
+import RPi.GPIO as pigpio
 import time
-import threading
-import queue
-import traceback
-from random import randint
-from thread import start_new_thread
+#import threading
+#import queue
+#import traceback
+#from random import randint
 
-pi=pigpio.pi()
+#pi=pigpio.pi()
 
 # CLIIO class -> handles all command line input/output
 class CLIIO:
@@ -76,7 +75,7 @@ class BLINK:
 			'h': lambda: cls.help,
 			'e': lambda: os.sys.exit()
 		}.get(cmd, lambda: cls.help)()
-
+	'''
 	def setLights(pin, brightness):
 		pi.set_PWM_dutycycle(pin, brightness)
 
@@ -229,7 +228,7 @@ class BLINK:
 			setLights(GREEN_PIN,randint(0,255))
 			setLights(BLUE_PIN,randint(0,255))
 			time.sleep(0.5)
-
+	'''
 	@classmethod
 	def help(cls, *args):
 
@@ -251,7 +250,7 @@ except Exception as e:
 
 finally:
 	CLIIO.print_to_shell('Aborting...')
-
+	'''
 	setLights(RED_PIN,0)
 	setLights(GREEN_PIN,0)
 	setLights(BLUE_PIN,0)
@@ -259,3 +258,4 @@ finally:
 	time.sleep(0.5)
 
 	pi.stop()
+	'''
