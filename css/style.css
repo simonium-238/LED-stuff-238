@@ -319,7 +319,7 @@ span{
     font-size: 20px;
     outline: none;
     float: right;
-    margin-right: 45px;
+    margin-right: 30px;
 }
 .inputDescription{
     float: left;
@@ -329,7 +329,7 @@ span{
     font-family: monospace;
     font-weight: 800;
     font-size: 20px;
-    margin-left: 45px;
+    margin-left: 30px;
     width: 75px;
     text-align: left
 }
