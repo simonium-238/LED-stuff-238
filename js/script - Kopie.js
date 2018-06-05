@@ -1,5 +1,5 @@
 var fullRGB;
-var finalColor;
+var finalColor = [255,255,255];
 var lastTypedColor = [255,255,255];
 
 function out()
@@ -25,7 +25,6 @@ function closeColorType()
     $("#red").text(r);
     $("#green").text(g);
     $("#blue").text(b);
-    document.getElementById("saturation").disabled = false;
     
     var rgbWritten = "rgba(" + r + "," + g + "," + b + "," + "0.8)";
     
@@ -51,7 +50,7 @@ function funcEditChange()
     
     $("#debuggingSectionLeft").css("background-color", rgbWritten);
     $("#colorSpan").css("background-color", rgbWritten);
-    $("#colorPreview").css("background-color", rgbWritten);s
+    $("#colorPreview").css("background-color", rgbWritten);
 }
 
 function funcEditRGB()
@@ -188,6 +187,7 @@ HSVtoRGB= function(color) {
 
 
 window.onload = function(){
+    document.getElementById("saturation").disabled = true;
     var canvas = document.getElementById("canvas");     //canvas als variable holen
     var ctx = canvas.getContext("2d");                  //2d-context aus canvas als variable holen
     var img = document.getElementById("imgWheel");      //rgb-ring als variable holen
@@ -201,6 +201,7 @@ window.onload = function(){
         if(pixelColor[0] == 255 || pixelColor[1] == 255 || pixelColor[2] == 255) //beim rgb ring ist immer eine farbe auf 255. so stellt man fest ob der benutzer auf den ring gecklickt hat
         {
              //var pixelColorWritten = "rgb(" + pixelColor[0] + ", " + pixelColor[1] + ", " + pixelColor[2] + ")"; //werte aus dem pixelColor array so zusammenfügen, dass sie weiterverwendet werden können
+            document.getElementById("saturation").disabled = false;
             document.styleSheets[0].addRule("input[type=range]::-webkit-slider-runnable-track", "background: linear-gradient(to right, rgb(" + pixelColor[0] + ", " + pixelColor[1] + ", " + pixelColor[2] + ") , rgb(255, 255, 255))");
             //$("#header").css("background-color", pixelColorWritten);
             
@@ -341,15 +342,120 @@ function dragElement(elmnt) {
         //$("#pageX").text(e.pageX);
         //$("#pageY").text(e.pageY);
     //});
+    
+    
+    $("#toFunctionBar").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+
+      var hash = this.hash;
+
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        window.location.hash = hash;
+      });
+    }
+  });
 };
 
 function singleColorBlinkChange()
 {
     var speed = document.getElementById("singleColorBlinkInput").value;
     var speed = speed.replace(",", ".");
+    var speed = speed * 2;
 
     document.styleSheets[0].addRule(".blink", "-webkit-animation: blink " + speed + "s linear infinite");
     document.styleSheets[0].addRule(".blink", "-moz-animation: blink " + speed + "s linear infinite");
-    document.styleSheets[0].addRule(".blink", "-ms-animation: blink " + speed + " linear infinite");
+    document.styleSheets[0].addRule(".blink", "-ms-animation: blink " + speed + "s linear infinite");
     document.styleSheets[0].addRule(".blink", "animation: blink " + speed + "s linear infinite");
+}
+
+function singleColorBreatheChange()
+{
+    var speed = document.getElementById("singleColorBreatheInput").value;
+    var speed = speed.replace(",", ".");
+
+    document.styleSheets[0].addRule(".breathe", "-webkit-animation: breathe " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".breathe", "-moz-animation: breathe " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".breathe", "-ms-animation: breathe " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".breathe", "animation: breathe " + speed + "s linear infinite");
+}
+
+function singleColorFlashChange()
+{
+    var speed = document.getElementById("singleColorFlashInput").value;
+    var speed = speed.replace(",", ".");
+    var speed = speed * 2;
+
+    document.styleSheets[0].addRule(".flash", "-webkit-animation: flash " + speed + "s linear infinite");
+    document.styleSheets[0].addRule("flash", "-moz-animation: flash " + speed + "s linear infinite");
+    document.styleSheets[0].addRule("flash", "-ms-animation: flash " + speed + "s linear infinite");
+    document.styleSheets[0].addRule("flash", "animation: flash " + speed + "s linear infinite");
+}
+
+function getJsonStuff(toJsonRgb, mode, intervall)
+{
+    var hex1 = toJsonRgb[0].toString(16);
+    var hex2 = toJsonRgb[1].toString(16);
+    var hex3 = toJsonRgb[2].toString(16);
+    
+    var hex = hex1 + hex2 + hex3;
+    
+    if(intervall != null)
+    {
+        var jsonStuff = [
+	        { "make":"hex", "model":hex },
+            { "make":"mode", "model":mode },
+            { "make":"intervall","model": intervall}
+        ];
+    }
+    else
+    {
+        var jsonStuff = [
+	       { "make":"hex", "model":hex },
+           { "make":"mode", "model":mode }
+        ];
+    }
+    
+    return jsonStuff;
+}
+
+function noEffect()
+{
+    // ajax the JSON to the server
+	$.post("192.168.8.2/home/pi/controller.py", getJsonStuff(finalColor, "noEffect"), function()
+    {
+        alert("It might works.");
+    });
+	// stop link reloading the page
+    event.preventDefault();
+}
+
+function singleColorBlink()
+{
+	$.post("192.168.8.2/home/pi/controller.py", getJsonStuff(finalColor, "singleColorBlink", document.getElementById("singleColorBlinkInput").value.replace(",", ".")), function()
+    {
+        alert("It might works.");
+    });
+    event.preventDefault();
+}
+
+function singleColorBreathe()
+{
+	$.post("192.168.8.2/home/pi/controller.py", getJsonStuff(finalColor, "singleColorBreathe", document.getElementById("singleColorBreatheInput").value.replace(",", ".")), function()
+    {
+        alert("It might works.");
+    });
+    event.preventDefault();
+}
+
+function singleColorFlash()
+{
+	$.post("192.168.8.2/home/pi/controller.py", getJsonStuff(finalColor, "singleColorFlash", document.getElementById("singleColorFlashInput").value.replace(",", ".")), function()
+    {
+        alert("It might works.");
+    });
+    event.preventDefault();
 }

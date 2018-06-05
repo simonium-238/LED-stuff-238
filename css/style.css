@@ -232,14 +232,22 @@ span{
     margin-right: auto;
 }
 #toFunctionBar{
+    display: block;
     background-color: #868686;
     margin-top: 10px;
-    height: 30px;
+    height: 31px;
     padding: 5px;
     font-family: monospace;
     font-weight: bolder;
     font-size: 125%;
     color: #2a2a2a;
+    text-decoration: none;
+    -webkit-transition: background-color 0.15s; /* Safari */
+    transition: background-color 0.15s;
+}
+#toFunctionBar:hover {
+    background-color: #2a2a2a;
+    color: #868686;
 }
 #functionBody{
     font-family: monospace;
@@ -247,6 +255,7 @@ span{
     color: #868686;
     padding: 0px;
     background-color: #868686;
+    margin-bottom: 25px;
 }
 .function{
     background-color: #2a2a2a;
@@ -330,4 +339,18 @@ span{
 	-ms-animation: blink .75s linear infinite;
 	-o-animation: blink .75s linear infinite;
 	 animation: blink .75s linear infinite;
+}
+.breathe {
+	-webkit-animation: breathe .75s linear infinite;
+	-moz-animation: breathe .75s linear infinite;
+	-ms-animation: breathe .75s linear infinite;
+	-o-animation: breathe .75s linear infinite;
+	 animation: breathe .75s linear infinite;
+}
+.flash {
+	-webkit-animation: flash .75s linear infinite;
+	-moz-animation: flash .75s linear infinite;
+	-ms-animation: flash .75s linear infinite;
+	-o-animation: flash .75s linear infinite;
+	 animation: flash .75s linear infinite;
 }
