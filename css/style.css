@@ -354,3 +354,10 @@ span{
 	-o-animation: flash .75s linear infinite;
 	 animation: flash .75s linear infinite;
 }
+.rgbFade{
+    -webkit-animation: rgbFade 10s linear infinite;
+	-moz-animation: rgbFade 10s linear infinite;
+	-ms-animation: rgbFade 10s linear infinite;
+	-o-animation: rgbFade 10s linear infinite;
+	 animation: rgbFade 10s linear infinite;
+}

@@ -390,37 +390,87 @@ function singleColorFlashChange()
     var speed = speed * 2;
 
     document.styleSheets[0].addRule(".flash", "-webkit-animation: flash " + speed + "s linear infinite");
-    document.styleSheets[0].addRule("flash", "-moz-animation: flash " + speed + "s linear infinite");
-    document.styleSheets[0].addRule("flash", "-ms-animation: flash " + speed + "s linear infinite");
-    document.styleSheets[0].addRule("flash", "animation: flash " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".flash", "-moz-animation: flash " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".flash", "-ms-animation: flash " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".flash", "animation: flash " + speed + "s linear infinite");
 }
 
-function getJsonStuff(toJsonRgb, mode, intervall)
+function rgbFadeChange()
 {
-    var hex1 = toJsonRgb[0].toString(16);
-    var hex2 = toJsonRgb[1].toString(16);
-    var hex3 = toJsonRgb[2].toString(16);
+    var speed = document.getElementById("rgbFadeInput").value;
+    var speed = speed.replace(",", ".");
+
+    document.styleSheets[0].addRule(".rgbFade", "-webkit-animation: rgbFade " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".rgbFade", "-moz-animation: rgbFade " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".rgbFade", "-ms-animation: rgbFade " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".rgbFade", "animation: rgbFade " + speed + "s linear infinite");
+}
+
+
+
+
+
+
+/*
+function getpostArray(rgb, mode, intervall)
+{
+    var hex1 = rgb[0].toString(16);
+    var hex2 = rgb[1].toString(16);
+    var hex3 = rgb[2].toString(16);
     
     var hex = hex1 + hex2 + hex3;
     
+    
     if(intervall != null)
     {
+        var postArray = [];
+        postArray['mode'] = mode;
+        postArray['hex'] = hex;
+        postArray['intervall'] = intervall;
+        
         var jsonStuff = [
 	        { "make":"hex", "model":hex },
             { "make":"mode", "model":mode },
             { "make":"intervall","model": intervall}
         ];
+        
     }
     else
     {
+        var postArray = [];
+        postArray['mode'] = mode;
+        postArray['hex'] = hex;
+        postArray['intervall'] = null;
+        
         var jsonStuff = [
 	       { "make":"hex", "model":hex },
            { "make":"mode", "model":mode }
         ];
+        
     }
     
-    return jsonStuff;
+    return postArray;
 }
+*/
+
+
+
+
+function toHex(rgb)
+{
+    var hex1 = rgb[0].toString(16);
+    var hex2 = rgb[1].toString(16);
+    var hex3 = rgb[2].toString(16);
+    
+    var hex = hex1 + hex2 + hex3;
+    
+    return hex;
+}
+
+
+
+
+
 
 function noEffect()
 {
@@ -458,4 +508,21 @@ function singleColorFlash()
         alert("It might works.");
     });
     event.preventDefault();
+}
+
+function rgbFade()
+{
+    var mode = "rgbFade";
+	var hex = toHex(finalColor);
+    var time = document.getElementById("rgbFadeInput").value.replace(",", ".");
+    
+    var data = mode + "." + hex + "." + time;
+    
+    $.ajax({
+        url: 'toPython.php',
+        data: 'data='+data,
+        success: function() {
+            alert("It might works...");
+        }
+    });
 }
