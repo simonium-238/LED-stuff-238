@@ -1,3 +1,4 @@
+var currentMode = 'none';
 var fullRGB;
 var finalColor = [255,255,255];
 var lastTypedColor = [255,255,255];
@@ -395,11 +396,19 @@ function singleColorFlashChange()
     document.styleSheets[0].addRule(".flash", "animation: flash " + speed + "s linear infinite");
 }
 
-function rgbFadeChange()
+function rgbFadeChangeSlow()
 {
-    var speed = document.getElementById("rgbFadeInput").value;
-    var speed = speed.replace(",", ".");
-
+    var speed = 10;
+    
+    document.styleSheets[0].addRule(".rgbFade", "-webkit-animation: rgbFade " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".rgbFade", "-moz-animation: rgbFade " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".rgbFade", "-ms-animation: rgbFade " + speed + "s linear infinite");
+    document.styleSheets[0].addRule(".rgbFade", "animation: rgbFade " + speed + "s linear infinite");
+}
+function rgbFadeChangeFast()
+{
+    var speed = 1;
+    
     document.styleSheets[0].addRule(".rgbFade", "-webkit-animation: rgbFade " + speed + "s linear infinite");
     document.styleSheets[0].addRule(".rgbFade", "-moz-animation: rgbFade " + speed + "s linear infinite");
     document.styleSheets[0].addRule(".rgbFade", "-ms-animation: rgbFade " + speed + "s linear infinite");
@@ -474,13 +483,19 @@ function toHex(rgb)
 
 function noEffect()
 {
-    // ajax the JSON to the server
-	$.post("192.168.8.2/home/pi/controller.py", getJsonStuff(finalColor, "noEffect"), function()
-    {
-        alert("It might works.");
+    var mode = "noEffect";
+	var hex = toHex(finalColor);
+    var time = document.getElementsByName("rgbFadeInput").value;
+    
+    var data = mode + "." + hex + "." + time + "." + currentMode;
+    
+    $.ajax({
+        url: 'toPython.php',
+        data: 'data='+data,
+        success: function() {
+            alert("It might works...");
+        }
     });
-	// stop link reloading the page
-    event.preventDefault();
 }
 
 function singleColorBlink()
@@ -514,9 +529,11 @@ function rgbFade()
 {
     var mode = "rgbFade";
 	var hex = toHex(finalColor);
-    var time = document.getElementById("rgbFadeInput").value.replace(",", ".");
+    var time = document.getElementsByName("rgbFadeInput").value;
     
-    var data = mode + "." + hex + "." + time;
+    var data = mode + "." + hex + "." + time + "." + currentMode;
+    
+    currentMode = mode;
     
     $.ajax({
         url: 'toPython.php',
@@ -526,3 +543,13 @@ function rgbFade()
         }
     });
 }
+
+
+
+
+
+
+
+
+
+

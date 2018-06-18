@@ -126,11 +126,9 @@
                 <div class="imageDif">
                     <div class="lamp"><div id="rgbFadeLight" class="light rgbFade"></div></div>
                 </div>
-                <div class="inputDescription">
-                    Duration:
-                </div>
-                <div>
-                    <input type="number" id="rgbFadeInput" class="FunctionInput" step="0.1" min="2" max="15" value="10" oninput="rgbFadeChange()">
+                <div class="radioInputDiv">
+                    Slow <input type="radio" name="rgbFadeInput" value="slow" class="radioInput" onclick="rgbFadeChangeSlow()" checked>
+                    <input type="radio" name="rgbFadeInput" value="fast" class="radioInput" onclick="rgbFadeChangeFast()"> Fast
                 </div>
             </div>
             
@@ -142,6 +140,7 @@
                 </div>
             </div>
         </div>
+        <button type="button" onclick="turnOff()">Turn Off</button>
 <style type="text/css">
 
 /* @group Blink */
@@ -285,9 +284,14 @@
     
 
 @-webkit-keyframes police {
-	0% { opacity: 1; }
-    5% { opacity: 1; }
-	100% { opacity: 0; }
+	0% { background-color: rgba(255, 0, 0, 0.8); }
+    1% { box-shadow: 0 0 60px 40px rgba(255, 0, 0, 0.8);}
+    33.33% { background-color: rgba(0, 255, 0, 0.8); }
+    33.33% { box-shadow: 0 0 60px 40px rgba(0, 255, 0, 0.8);}
+    66.66% { background-color: rgba(0, 0, 255, 0.8); }
+    66.66% { box-shadow: 0 0 60px 40px rgba(0, 0, 255, 0.8);}
+    100% { background-color: rgba(255, 0, 0, 0.8); }
+    100% { box-shadow: 0 0 60px 40px rgba(255, 0, 0, 0.8);}
 }
 @-moz-keyframes police {
 	0% { opacity: 1; }

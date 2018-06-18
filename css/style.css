@@ -333,6 +333,17 @@ span{
     width: 75px;
     text-align: left
 }
+.radioInput{
+}
+.radioInputDiv{
+    height: 23px;
+     color: #868686;
+    font-family: monospace;
+    font-weight: 800;
+    font-size: 20px;
+    position: absolute;
+    width: 230px;
+}
 .blink {
 	-webkit-animation: blink .75s linear infinite;
 	-moz-animation: blink .75s linear infinite;
