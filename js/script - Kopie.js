@@ -547,7 +547,7 @@ function rgbFade()
     //var data = mode + "." + hex + "." + time + "." + currentMode;
     
     $.ajax({
-        url: '/var/www/html/toPython.php',
+        url: 'toPython.php',
         //data: 'data='+data,
         data: {mode: mode,currentMode: currentMode,time: time},
         success: function() {
