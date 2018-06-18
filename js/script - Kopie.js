@@ -549,7 +549,7 @@ function rgbFade()
     $.ajax({
         url: '/var/www/html/toPython.php',
         //data: 'data='+data,
-        data: {mode: mode,currentMode: currentMode, time: time},
+        data: {mode: mode,currentMode: currentMode,time: time},
         success: function() {
             alert("It might work...");
         }
@@ -572,7 +572,7 @@ function turnOff()
         url: 'toPython.php',
         data: 'turnOff='+currentMode,
         success: function() {
-            alert("It might works...");
+            alert("It might work...");
         }
     });
     currentMode = 'none';
