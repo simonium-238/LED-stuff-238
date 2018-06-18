@@ -1,12 +1,8 @@
 <?php
-if(isset($_GET['data']))
+if(isset($_GET['mode']))
 {
-    $data = $_GET['data'];
-    $data = explode('.', $data);
-    $mode = $data[0];
-    $hex = $data[1];
-    $time = $data[2];
-    $currentMode = $data[3];
+    $mode = $_GET['mode'];
+    $currentMode = $_GET['currentMode'];
 
     if($currentMode != 'none')
     {
@@ -46,4 +42,6 @@ if(isset($_GET['turnOff']))
         echo shell_exec("python /home/pi/controller/shutdown.py");
     }
 }
+unset($_GET['mode']);
+unset($_GET['turnOff']);
 ?>

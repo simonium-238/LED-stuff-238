@@ -528,20 +528,33 @@ function singleColorFlash()
 function rgbFade()
 {
     var mode = "rgbFade";
-	var hex = toHex(finalColor);
-    var time = document.getElementsByName("rgbFadeInput").value;
+	//var hex = toHex(finalColor);
+    var radios = document.getElementsByName('rgbFadeInput');
+
+    for (var i = 0, length = radios.length; i < length; i++)
+    {
+        if (radios[i].checked)
+        {
+            // do whatever you want with the checked radio
+            var time = radios[i].value;
+
+            // only one radio can be logically checked, don't check the rest
+            break;
+        }
+    }
+    //var time = document.getElementsByName("rgbFadeInput").value;
     
-    var data = mode + "." + hex + "." + time + "." + currentMode;
-    
-    currentMode = mode;
+    //var data = mode + "." + hex + "." + time + "." + currentMode;
     
     $.ajax({
-        url: 'toPython.php',
-        data: 'data='+data,
+        url: '/var/www/html/toPython.php',
+        //data: 'data='+data,
+        data: {mode: mode,currentMode: currentMode, time: time},
         success: function() {
-            alert("It might works...");
+            alert("It might work...");
         }
     });
+    currentMode = mode;
 }
 
 
@@ -553,3 +566,14 @@ function rgbFade()
 
 
 
+function turnOff()
+{
+    $.ajax({
+        url: 'toPython.php',
+        data: 'turnOff='+currentMode,
+        success: function() {
+            alert("It might works...");
+        }
+    });
+    currentMode = 'none';
+}
