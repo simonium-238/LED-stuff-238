@@ -3,6 +3,18 @@ var fullRGB;
 var finalColor = [255,255,255];
 var lastTypedColor = [255,255,255];
 
+function turn()
+{
+    $.ajax({
+        url: 'toPython.php',
+        data: 'turnOff='+currentMode,
+        success: function() {
+            //alert("It might work...");
+        }
+    });
+    currentMode = 'none';
+}
+
 function out()
 {
     $("#colorSpan").css("opacity", "0");
@@ -555,25 +567,4 @@ function rgbFade()
         }
     });
     currentMode = mode;
-}
-
-
-
-
-
-
-
-
-
-
-function turnOff()
-{
-    $.ajax({
-        url: 'toPython.php',
-        data: 'turnOff='+currentMode,
-        success: function() {
-            alert("It might work...");
-        }
-    });
-    currentMode = 'none';
 }

@@ -255,7 +255,24 @@ span{
     color: #868686;
     padding: 0px;
     background-color: #868686;
-    margin-bottom: 25px;
+}
+#turnOff{
+    width: 100%;
+    padding: 1%;
+    margin-bottom: 3%;
+    border: none;
+    background-color: #868686;
+    font-family: monospace;
+    font-weight: bolder;
+    color: #2a2a2a;
+    font-size: 125%;
+    -webkit-transition: background-color 0.15s; /* Safari */
+    transition: background-color 0.15s;
+    outline: none;
+}
+#turnOff:hover {
+    background-color: #2a2a2a;
+    color: #868686;
 }
 .function{
     background-color: #2a2a2a;

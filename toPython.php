@@ -8,7 +8,8 @@ if(isset($_GET['mode']))
     {
         if($currentMode != 'noEffect')
         {
-            echo shell_exec("ps -ef | grep python | exec: kill -9 {};");
+            //echo shell_exec("ps -ef | grep python | exec: kill -9 {}\;");
+            echo shell_exec("kill $(ps aux | grep '[p]ython' | awk '{print $2'})");
         }
         echo shell_exec("python /home/pi/controller/shutdown.py");
     }
@@ -21,7 +22,7 @@ if(isset($_GET['mode']))
             echo shell_exec("python /home/pi/controller/blink.py '" . $hex . "' '" . $time . "'");
             break;
         case 'rgbFade':
-            echo shell_exec("python /home/pi/controller/fading.py '" . $hex . "' '" . $time . "'");
+            echo shell_exec("python /home/pi/controller/fading.py '" . $time . "'");
             break;
     }
 }
