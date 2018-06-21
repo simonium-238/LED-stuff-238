@@ -1,3 +1,5 @@
+#initialization
+
 RED_PIN = 17
 GREEN_PIN = 22
 BLUE_PIN = 24
@@ -14,9 +16,13 @@ pi=pigpio.pi()
 
 breakTime = float(sys.argv[1])
 
+#define functions
+
 def setLights(pin, brightness):
 	pi.set_PWM_dutycycle(pin, brightness)
 
+#run program
+	
 while True:
 	setLights(RED_PIN,randint(0,255))
 	setLights(GREEN_PIN,randint(0,255))

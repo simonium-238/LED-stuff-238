@@ -1,3 +1,5 @@
+#initialization
+
 RED_PIN = 17
 GREEN_PIN = 22
 BLUE_PIN = 24
@@ -11,16 +13,23 @@ import time
 
 pi=pigpio.pi()
 
-hex = sys.argv[1]
+red = sys.argv[1]
+green = sys.argv[2]
+blue = sys.argv[3]
 
-rgb = []
-rgb = tuple(int(hex[i:i+2], 16) for i in (0, 2 ,4))
-red = rgb[0]
-green = rgb[1]
-blue = rgb[2]
+if(red == ''):
+	red=100
+if(green == ''):
+	green=100
+if(blue == ''):
+	blue=100
 
+#define functions
+	
 def setLights(pin, brightness):
 	pi.set_PWM_dutycycle(pin, brightness)
+
+#run program
 	
 setLights(RED_PIN,red)
 setLights(GREEN_PIN,green)
