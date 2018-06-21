@@ -18,11 +18,11 @@ green = sys.argv[2]
 blue = sys.argv[3]
 
 if sys.argv[4] == "slow":
-	STEPS = 0.001
+	STEPS = 0.025
 elif sys.argv[4] == "medium":
-	STEPS = 0.01
+	STEPS = 0.055
 elif sys.argv[4] == "fast":
-	STEPS = 0.05
+	STEPS = 0.1
 	
 bright = 255
 
@@ -39,6 +39,6 @@ while True:
 	setLights(GREEN_PIN, green, bright)
 	setLights(BLUE_PIN, blue, bright)
 	if(bright > 0):
-		bright = bright - STEP
+		bright = bright - STEPS
 	else:
 		bright = 255
